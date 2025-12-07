@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\Planet;   
+use Illuminate\Http\Request;
 
 class PlanetController extends Controller
 {
     public function index()
     {
         // SELECT * FROM planets
-        $planets = DB::table('planets')->get();
+        $planets = Planet::all();   
 
         return view('planets.index', [
             'planets' => $planets
@@ -19,7 +20,7 @@ class PlanetController extends Controller
     public function show($id)
     {
         // SELECT * FROM planets WHERE id = ?
-        $planet = DB::table('planets')->where('id', $id)->first();
+        $planet = Planet::findOrFail($id);   
 
         return view('planets.show', [
             'planet' => $planet
