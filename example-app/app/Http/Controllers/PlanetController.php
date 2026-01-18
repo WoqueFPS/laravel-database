@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Planet;   
-use Illuminate\Http\Request;
+use App\Models\Planet;
 
 class PlanetController extends Controller
 {
     public function index()
     {
-        // SELECT * FROM planets
-        $planets = Planet::all();   
-
-        return view('planets.index', [
-            'planets' => $planets
-        ]);
+        // Eager loading van het zonnestelsel
+        $planets = Planet::with('solarSystem')->get();
+        return view('planets.index', compact('planets'));
     }
 
     public function show($id)
     {
-        // SELECT * FROM planets WHERE id = ?
-        $planet = Planet::findOrFail($id);   
-
-        return view('planets.show', [
-            'planet' => $planet
-        ]);
+        $planet = Planet::with('solarSystem')->findOrFail($id);
+        return view('planets.show', compact('planet'));
     }
 }

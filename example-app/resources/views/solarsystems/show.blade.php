@@ -1,15 +1,15 @@
-<h1>All Planets</h1>
+<h1>{{ $solarsystem->name }}</h1>
+
+<h2>Planets in this Solar System:</h2>
 <table>
     <tr>
         <th>Name</th>
-        <th>Solar System</th>
         <th>Description</th>
         <th>Size (km)</th>
     </tr>
-    @foreach ($planets as $planet)
+    @foreach ($solarsystem->planets as $planet)
     <tr>
         <td>{{ $planet->name }}</td>
-        <td>{{ $planet->solarSystem->name ?? 'Unknown' }}</td>
         <td>{{ $planet->description }}</td>
         <td>{{ $planet->size_in_km }}</td>
     </tr>
